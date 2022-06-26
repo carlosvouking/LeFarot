@@ -20,6 +20,8 @@ library PriceConverter {
 
     function getEquivalenceEuroToUsd() internal view returns (uint256) {
         // il nous faut l'adresse Rinkeby de l'équivalence EUR / USD
+        // https://docs.chain.link/docs/ethereum-addresses/
+        //https://rinkeby.etherscan.io/address/0x78F9e60608bF48a1155b4B2A5e31F32318a1d85F
         AggregatorV3Interface priceFeedEuroToUsd = AggregatorV3Interface(
             0x78F9e60608bF48a1155b4B2A5e31F32318a1d85F
         );
@@ -40,7 +42,7 @@ library PriceConverter {
         return ethAmountInUsd;
     }
 
-    function getConversionRateInEuro(ethAmountEuro)
+    function getConversionRateInEuro(uint256 ethAmountEuro)
         internal
         view
         returns (uint256)

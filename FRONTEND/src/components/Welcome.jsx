@@ -85,12 +85,11 @@ const Welcome = () => {
 
                     {false ? (<Loader />) 
                       : (
-                      <button type="button" onClick={handleSubmit} className="text-white w-full mt-2 border-[1px] p-2 border-[gray] rounded-full cursor-pointer">
-                          Transférer
-                        </button>
+                          <button type="button" onClick={handleSubmit} className="text-white w-full mt-2 border-[1px] p-2 border-[gray] rounded-full cursor-pointer">
+                            Transférer
+                          </button>
                         )
                     }
-
                  </div> 
               </div>                              
            </div>

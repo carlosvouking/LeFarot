@@ -18,14 +18,14 @@ library PriceConverter {
         return uint256(answer * 10000000000);
     }
 
-    function getEquivalenceEurToUsd() internal view returns (uint256) {
+    function getEquivalenceEuroToUsd() internal view returns (uint256) {
         // il nous faut l'adresse Rinkeby de l'équivalence EUR / USD
         AggregatorV3Interface priceFeedEuroToUsd = AggregatorV3Interface(
             0x78F9e60608bF48a1155b4B2A5e31F32318a1d85F
         );
-        (, int256 equivalent_Eur_Usd, , , ) = priceFeedEuroToUsd
+        (, int256 equivalentEurToUsd, , , ) = priceFeedEuroToUsd
             .latestRoundData();
-        return uint256(equivalent_Eur_Usd);
+        return uint256(equivalentEurToUsd);
     }
 
     // 1000000000
@@ -45,7 +45,7 @@ library PriceConverter {
         view
         returns (uint256)
     {
-        uint256 ethPriceInEuro = getEquivalenceEurToUsd();
+        uint256 ethPriceInEuro = getEquivalenceEuroToUsd();
         uint256 ethAmountInEuro = (ethPriceInEuro * ethAmountEuro) /
             1000000000000000000;
         // ci dessous la cobersion actuelle entre ETH/EUR après ajusemtn des zéros

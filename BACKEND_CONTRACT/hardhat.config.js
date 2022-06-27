@@ -26,7 +26,7 @@ module.exports = {
     networks: {
         ropsten: {
             url: process.env.ROPSTEN_URL || "",
-            accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+            accounts: [],
         },
     },
     gasReporter: {
@@ -36,4 +36,13 @@ module.exports = {
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
     },
+    namedAccounts: {
+        deployer: {
+            default: 0,
+
+        },
+        user: {
+            default: 1,
+        },
+    }
 };

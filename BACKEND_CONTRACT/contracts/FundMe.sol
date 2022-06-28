@@ -15,9 +15,19 @@ contract FundMe {
       // Could we make this constant?  /* hint: no! We should make it immutable! */
     address public /* immutable */ owner;
     uint256 public constant MINIMUM_USD = 50 * 10 ** 18;   
+
+    // 'priceFeed' et 'priceFeedEuroToUsd' sont modularisés en fonction du type de blockchain
+    //....sur laquelle on se trouve...on n'a plus besoin des priceFeed hard coded dans './PriceConverter'
+    AggregatorV3Interface public priceFeed;
+    AggregatorV3Interface public priceFeedEuroToUsd;
+
     
-    constructor(address priceFeedAddress) {
+    // le constructeur est invoqué chaue fois que le contract est déployé.
+    constructor(address priceFeedAddress, address priceFeedEuroToUsdAddress) {
         owner = msg.sender;
+        priceFeed = AggregatorV3Interface(priceFeedAddress);  // ETH<=>USD priceFeed
+        priceFeedEuroToUsd = AggregatorV3Interface(priceFeedEuroToUsdAddress);  // Eur0<=>USD
+
     }
 
     function fund() public payable {

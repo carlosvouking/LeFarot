@@ -13,11 +13,11 @@ contract FundMe {
     address[] public funders;
 
       // Could we make this constant?  /* hint: no! We should make it immutable! */
-    address public /* immutable */ i_owner;
+    address public /* immutable */ owner;
     uint256 public constant MINIMUM_USD = 50 * 10 ** 18;   
     
-    constructor() {
-        i_owner = msg.sender;
+    constructor(address priceFeedAddress) {
+        owner = msg.sender;
     }
 
     function fund() public payable {
@@ -34,7 +34,7 @@ contract FundMe {
     
     modifier onlyOwner {
         // require(msg.sender == owner);
-        if (msg.sender != i_owner) revert NotOwner();
+        if (msg.sender != owner) revert NotOwner();
         _;
     }
     

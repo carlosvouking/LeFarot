@@ -1,4 +1,4 @@
-// import statements: We can do this in 3diferent ways according to the ease of reading and understand
+// import statements: We can do this in 3 diferent ways according to the ease of reading and understand
 
 //1rst way..............
 // function deployF(hre) {

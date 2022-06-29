@@ -15,7 +15,7 @@
 
 
 // 3d way..............
-// on utilse ces objets de déploiements (getNamedAccounts, deployments) qui nous donnent accès à des functions
+// Ces objets de déploiements (getNamedAccounts, deployments) du hre nous donnent accès à des functions 'deploy', 'log', et 'deployer' account
 module.exports = async({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()

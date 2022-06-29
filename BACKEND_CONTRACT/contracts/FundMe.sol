@@ -15,6 +15,7 @@ contract FundMe {
       // Could we make this constant?  /* hint: no! We should make it immutable! */
     address public /* immutable */ owner;
     uint256 public constant MINIMUM_USD = 50 * 10 ** 18;  
+    uint256 public constant MINIMUM_EUR = 50 * 10 ** 18;
   
 
     // 'priceFeed' et 'priceFeedEuroToUsd' sont modularisés en fonction du type de blockchain et serviront désormais de 'PriceConverter'
@@ -33,7 +34,7 @@ contract FundMe {
 
     function fund() public payable {
         require(msg.value.getConversionRate(priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");
-        require(msg.value.getConversionRateInEuro(priceFeedEuroToUsd) >= MINIMUM_EURO, "Not enough Eth to proceed !");
+        require(msg.value.getConversionRateInEuro(priceFeedEuroToUsd) >= MINIMUM_EUR, "Not enough Eth to proceed !");
         // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);

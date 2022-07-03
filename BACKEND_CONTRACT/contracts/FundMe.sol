@@ -15,7 +15,7 @@ contract FundMe {
       // Could we make this constant?  /* hint: no! We should make it immutable! */
     address public /* immutable */ owner;
     uint256 public constant MINIMUM_USD = 50 * 10 ** 18;  
-    uint256 public constant MINIMUM_EUR = 50 * 10 ** 18;
+    //uint256 public constant MINIMUM_EUR = 50 * 10 ** 18;
   
 
     // 'priceFeed' et 'priceFeedEuroToUsd' sont modularisés en fonction du type de blockchain et serviront désormais de 'PriceConverter'

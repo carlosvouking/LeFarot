@@ -29,8 +29,13 @@ contract FundMe {
         owner = msg.sender;
         priceFeed = AggregatorV3Interface(priceFeedAddress);  // ETH<=>USD priceFeed
         priceFeedEuroToUsd = AggregatorV3Interface(priceFeedEuroToUsdAddress);  // Euro=>USD 
-
     }
+
+    // get the descripption of the contract
+    function getDescription() external view returns (string memory) {
+        return priceFeed.description();
+    }
+
 
     function fund() public payable {
         require(msg.value.getConversionRate(priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");

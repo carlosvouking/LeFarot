@@ -6,7 +6,7 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 // Why is this a library and not abstract?
 // Why not an interface?
 library PriceConverter {
-    // We could make this public, but then we'd have to deploy it
+    // // convert our msg.value to USD equivalent...We could make this public, but then we'd have to deploy it
     function getPrice(AggregatorV3Interface priceFeed)
         internal
         view

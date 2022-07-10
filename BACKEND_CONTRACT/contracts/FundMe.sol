@@ -26,7 +26,7 @@ contract FundMe {
     
     // le constructeur est invoqué chaue fois que le contract est déployé.
     constructor(address priceFeedAddress, address priceFeedEuroToUsdAddress) {
-        owner = msg.sender;
+        owner = msg.sender;  // the guy who is deploying the contract
         priceFeed = AggregatorV3Interface(priceFeedAddress);  // ETH<=>USD priceFeed
         priceFeedEuroToUsd = AggregatorV3Interface(priceFeedEuroToUsdAddress);  // Euro=>USD 
     }
@@ -49,7 +49,7 @@ contract FundMe {
     modifier onlyOwner {
         // require(msg.sender == owner);
         if (msg.sender != owner) revert NotOwner();
-        _;
+        _;  // doing the rest of the code in the function which inherits the 'onlyOwner' modifier
     }
     
     function withdraw() payable onlyOwner public {
@@ -61,7 +61,7 @@ contract FundMe {
         funders = new address[](0);
 
         /* 
-        Pour retirer les fonds cotisés, il se présente 3 méthodes possible: Par Transfert, Par Envoi, Par Call 
+        Pour retirer les fonds cotisés, il se présente 3 méthodes possibles: Par Transfert, Par Envoi, Par Call 
         remeber Transfer and Send methods are gas expensive 2300TH 
         faut pas oublier de convertir l'adresse 'msg.value' en adresse payable 'payable(msg.value)'.
         */

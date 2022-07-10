@@ -57,15 +57,22 @@ contract FundMe {
             address funder = funders[funderIndex];
             addressToAmountFunded[funder] = 0;
         }
+        // resetting our funders array with (0) funders inside...thus withdrawing the funds and restart funding with a completely blank array
         funders = new address[](0);
-        // // transfer
+
+        /* 
+        Pour retirer les fonds cotisés, il se présente 3 méthodes possible: Par Transfert, Par Envoi, Par Call 
+        remeber Transfer and Send methods are gas expensive 2300TH 
+        faut pas oublier de convertir l'adresse 'msg.value' en adresse payable 'payable(msg.value)'.
+        */
+        // // transfer....throws an error if it fails
         // payable(msg.sender).transfer(address(this).balance);
-        // // send
+        // // send...returns a bool if it fails
         // bool sendSuccess = payable(msg.sender).send(address(this).balance);
-        // require(sendSuccess, "Send failed");
-        // call
+        // require(sendSuccess, "Send failed");   // help revert the transaction if it fails
+        // call...can be used to call any function in ethereum without even have to have an ABI
         (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
-        require(callSuccess, "Call failed");
+        require(callSuccess, "Call failed"); // revert if the 'call' fails
     }
     // Explainer from: https://solidity-by-example.org/fallback/
     // Ether is sent to contract

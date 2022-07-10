@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "simonsiefke.prettier-vscode",
+        "juanblanco.solidity",
+        "hosho.solidity-debugger"
+    ]
+}

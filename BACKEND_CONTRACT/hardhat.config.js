@@ -21,21 +21,30 @@ task("accounts", "Prints the list of accounts", async(taskArgs, hre) => {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
+
+ const ROPSTEN_URL = process.env.ROPSTEN_URL
+ const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
+ const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
+
 module.exports = {
     solidity: "0.8.8",
     defaultNetwork: "hardhat",
     networks: {
         ropsten: {
-            url: process.env.ROPSTEN_URL || "",
+            url: ROPSTEN_URL || "",
             accounts: [],
         },
+        rinkeby: {
+            url: RINKEBY_RPC_URL || "",
+            accounts: []
+        }
+    },
+    etherscan: {
+        apiKey: ETHERSCAN_API_KEY
     },
     gasReporter: {
         enabled: process.env.REPORT_GAS !== undefined,
         currency: "USD",
-    },
-    etherscan: {
-        apiKey: process.env.ETHERSCAN_API_KEY,
     },
     namedAccounts: {
         deployer: {

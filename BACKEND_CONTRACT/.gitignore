@@ -1,11 +1,12 @@
 node_modules
 .env
-coverage
-coverage.json
 typechain
 install_nvm
 
 #Hardhat files
 cache
 artifacts
+gas-report.txt
+coverage.json
+coverage
 

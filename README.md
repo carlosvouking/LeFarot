@@ -1,5 +1,6 @@
 ## Table of Contents
 #### 1-[About the Farot project](https://vitejs.dev/guide/)
+    - #### a/-[Build components](https://vitejs.dev/guide/)
 #### 2-[How to get started](https://vitejs.dev/guide/)
 #### 3-[Main usage](https://vitejs.dev/guide/)
 

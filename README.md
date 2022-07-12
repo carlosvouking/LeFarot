@@ -1,3 +1,7 @@
+## Table of Contents
+## 1-[About the Farot project](https://vitejs.dev/guide/)
+
+
 ## WHAT IS THIS PROJECT ALL ABOUT ?
 we try here to build a fullstack app (Frontend + Backend) tool to help funding processes.
 

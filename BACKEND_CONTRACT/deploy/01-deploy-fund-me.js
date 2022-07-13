@@ -4,6 +4,7 @@
 // function deployF(hre) {
 //     console.log("Testing deployF !");
 //     hre.getNamedAccounts()
+//     hre.deployments
 // }
 // module.exports.default = deployF
 
@@ -14,7 +15,7 @@
 // }
 
 
-// 3d way..............
+// 3rd way..............
 // Ces objets de déploiements (getNamedAccounts, deployments) du hre nous donnent accès à des functions 'deploy', 'log', et 'deployer' account
 module.exports = async({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments

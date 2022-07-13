@@ -1,7 +1,7 @@
 node_modules
 .env
 typechain
-install_nvm
+install_nvm.sh
 
 #Hardhat files
 cache

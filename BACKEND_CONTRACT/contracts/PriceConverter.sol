@@ -22,7 +22,7 @@ library PriceConverter {
         return uint256(answer * 10000000000);
     }
 
-    function getEquivalenceEuroToUsd(AggregatorV3Interface priceFeedEuroToUsd)
+    function getPriceEuroToUsd(AggregatorV3Interface priceFeedEuroToUsd)
         internal
         view
         returns (uint256)
@@ -39,23 +39,16 @@ library PriceConverter {
 
     // 1000000000
     // Pass some ETH Amount and at the other side how much that Eth amount is worth in termq of USD 
-    function getConversionRate(
-        uint256 ethAmount,
-        AggregatorV3Interface priceFeed
-    ) internal view returns (uint256) {
+    function getConversionRate(uint256 ethAmount, AggregatorV3Interface priceFeed) internal view returns (uint256) {
         uint256 ethPrice = getPrice(priceFeed);
         uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;
         // the actual ETH/USD conversion rate, after adjusting the extra 0s.
         return ethAmountInUsd;
     }
 
-    function getConversionRateInEuro(
-        uint256 ethAmountEuro,
-        AggregatorV3Interface priceFeedEuroToUsd
-    ) internal view returns (uint256) {
-        uint256 ethPriceInEuro = getEquivalenceEuroToUsd(priceFeedEuroToUsd);
-        uint256 ethAmountInEuro = (ethPriceInEuro * ethAmountEuro) /
-            1000000000000000000;
+    function getConversionRateInEuro(uint256 ethAmountEuro, AggregatorV3Interface priceFeedEuroToUsd) internal view returns (uint256) {
+        uint256 ethPriceInEuro = getPriceEuroToUsd(priceFeedEuroToUsd);
+        uint256 ethAmountInEuro = (ethPriceInEuro * ethAmountEuro) / 1000000000000000000;
         // ci dessous la conversion actuelle entre ETH/EUR après ajustement des zéros
         return ethAmountInEuro;
     }

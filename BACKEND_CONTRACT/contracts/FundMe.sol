@@ -14,20 +14,20 @@ contract FundMe {
 
       // Could we make this constant?  /* hint: no! We should make it immutable! */
     address public /* immutable */ owner;
-    uint256 public constant MINIMUM_USD = 50 * 10 ** 18;  
-    //uint256 public constant MINIMUM_EUR = 50 * 10 ** 18;
+    uint256 public constant MINIMUM_USD = 50 * 10 ** 18;
+    uint256 public constant MINIMUM_EUR = 50 * 10 ** 18;
+  
   
 
-    // 'priceFeed' et 'priceFeedEuroToUsd' sont modularisés en fonction du type de blockchain et serviront désormais de 'PriceConverter'
-    //....sur laquelle on se trouve...on n'a plus besoin des priceFeed hard coded dans './PriceConverter'
+    // 'priceFeed' et 'priceFeedEuroToUsd' sont variables et modularisés en fonction du type de blockchain (serviront désormais de 'PriceConverter')    
     AggregatorV3Interface public priceFeed;    
-    AggregatorV3Interface public priceFeedEuroToUsd;
+    AggregatorV3Interface public priceFeedEuroToUsd;  
 
     
-    // le constructeur est invoqué chaue fois que le contract est déployé.
+    // passer coe argument l'adresse de prix en fucntion de la blockchain sur laquelle on opère Ethereum, BNB, Polygonlgon...Mainnet, rinkeby, Kovan etc...
     constructor(address priceFeedAddress, address priceFeedEuroToUsdAddress) {
         owner = msg.sender;  // the guy who is deploying the contract
-        priceFeed = AggregatorV3Interface(priceFeedAddress);  // ETH<=>USD priceFeed
+        priceFeed = AggregatorV3Interface(priceFeedAddress);  // ETH<=>USD // instead of 'priceFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e)' which is only for Rinkeby;
         priceFeedEuroToUsd = AggregatorV3Interface(priceFeedEuroToUsdAddress);  // Euro=>USD 
     }
 
@@ -38,11 +38,17 @@ contract FundMe {
 
 
     function fund() public payable {
-        require(msg.value.getConversionRate(priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");
+        require(msg.value.getConversionRate(priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");   // ConversionRate ds 'PriceConverter' aura désormais 2 paramètres: 'msg.value' et 'priceFeed'
         //require(msg.value.getConversionRateInEuro(priceFeedEuroToUsd) >= MINIMUM_EUR, "Not enough Eth to proceed !");
         // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
+    }
+
+    function fundEuro() public payable {
+        require(msg.value.getConversionRateInEuro(priceFeedEuroToUsd) >= MINIMUM_EUR,  "You probably need more ETH!");
+        addressToAmountFunded[msg.sender] = addressToAmountFunded[msg.sender] + msg.value;
+        funders.push(msg.sender);     
     }
      
   

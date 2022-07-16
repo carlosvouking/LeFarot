@@ -30,7 +30,7 @@ task("accounts", "Prints the list of accounts", async(taskArgs, hre) => {
 
 module.exports = {
     solidity: "0.8.8",
-    defaultNetwork: "hardhat",
+    defaultNetwork: "hardhat",   // blank blockchain...is detroyed once the script ends. 
     networks: {
         ropsten: {
             url: ROPSTEN_URL || "",
@@ -46,7 +46,7 @@ module.exports = {
     },
     gasReporter: {
         enabled: process.env.REPORT_GAS !== undefined,
-        currency: "EUR",  // in order to get this currency, we need an API key from coinmarketcap.
+        currency: "USD",  // in order to get this currency, we need an API key from coinmarketcap.
         outputFile: "gas-report.txt",
         nocolors: true,
         coinmarketcap: COINMARKETCAP_API_KEY,  // ceci fera un appel api sur coinmerketcap à chaque fois qu'on executera un rapport de consommation de gas

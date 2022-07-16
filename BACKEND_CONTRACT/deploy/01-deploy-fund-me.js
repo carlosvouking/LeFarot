@@ -22,3 +22,10 @@ module.exports = async({ getNamedAccounts, deployments }) => {
     const { deployer } = await getNamedAccounts()
     const chainId = network.config.chainId
 }
+
+
+// Pour déployer le contract FundMe, que se passera t'il si on change de chaines ?
+// .. Donc il est tjrs recommendé de tester localement(localhost, default hardhat) avant de passer en testnet (Rinkeby, Ropsten...)
+// ... Alors pour déployer sur localhost ou default hardhat en local, on utilisera des 'MOCK' pour mimiquer le mainnet.
+
+

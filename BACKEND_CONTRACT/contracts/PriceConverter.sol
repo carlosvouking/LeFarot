@@ -6,7 +6,9 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 // Why is this a library and not abstract?
 // Why not an interface?
 library PriceConverter {
-    // // convert our msg.value to USD equivalent...We could make this public, but then we'd have to deploy it
+    // price Of ETH In terms of USD......answer is in USD.....// ie : to buy 1eth , must spend 'answer' USD
+    // Donc 'answer' c'est le nombre de $USD qu'il faut pour achetehr 1eth.
+    //....We could make this public, but then we'd have to deploy it
     function getPrice(AggregatorV3Interface priceFeed)
         internal
         view
@@ -38,17 +40,24 @@ library PriceConverter {
     }
 
     // 1000000000
-    // Pass some ETH Amount and at the other side how much that Eth amount is worth in termq of USD 
-    function getConversionRate(uint256 ethAmount, AggregatorV3Interface priceFeed) internal view returns (uint256) {
-        uint256 ethPrice = getPrice(priceFeed);
-        uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;
+    // Pass some ETH Amount and at the other side how much that Eth amount is worth in terms of USD
+    function getConversionRate(
+        uint256 ethAmount,
+        AggregatorV3Interface priceFeed
+    ) internal view returns (uint256) {
+        uint256 ethPrice = getPrice(priceFeed); //ethprice (en $USD )::  le nombre de $USD qu il faut pour acheter 1 eth.
+        uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000; //ethAmountInUsd (en Eth)::  le nombre de $USD qu'il faut donc pour le nombre de ETH apportés pour participer (msg.value)
         // the actual ETH/USD conversion rate, after adjusting the extra 0s.
-        return ethAmountInUsd;
+        return ethAmountInUsd; //$USD
     }
 
-    function getConversionRateInEuro(uint256 ethAmountEuro, AggregatorV3Interface priceFeedEuroToUsd) internal view returns (uint256) {
+    function getConversionRateInEuro(
+        uint256 ethAmountEuro,
+        AggregatorV3Interface priceFeedEuroToUsd
+    ) internal view returns (uint256) {
         uint256 ethPriceInEuro = getPriceEuroToUsd(priceFeedEuroToUsd);
-        uint256 ethAmountInEuro = (ethPriceInEuro * ethAmountEuro) / 1000000000000000000;
+        uint256 ethAmountInEuro = (ethPriceInEuro * ethAmountEuro) /
+            1000000000000000000;
         // ci dessous la conversion actuelle entre ETH/EUR après ajustement des zéros
         return ethAmountInEuro;
     }

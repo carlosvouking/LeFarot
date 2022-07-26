@@ -16,16 +16,36 @@
 
 
 // 3rd way..............
-// Ces objets de déploiements (getNamedAccounts, deployments) du hre nous donnent accès à des functions 'deploy', 'log', et 'deployer' account
+// Ces objets de déploiements (getNamedAccounts, deployments) du 'HRE' nous donnent accès à des functions 'deploy', 'log', et 'deployer'
 module.exports = async({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
     const chainId = network.config.chainId
+
+    //To fill in the arg[] this is still hard coding...we need to parametize this in function of each network we are in.
+    //const address = "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e"  
+
+    // instead we will derive the actual network through its chainId....reference to: AAVE/aave-v3-core github which also deploys on multiple network addresses.
+
+
+
+    // Pour déployer le contract FundMe, que se passera t'il si on change de chaines ?
+    // .. Donc il est tjrs recommendé de tester localement(localhost, default hardhat) avant de passer en testnet (Rinkeby, Ropsten...)
+    // ... Alors pour déployer sur localhost ou default hardhat en local, on utilisera des 'MOCK' pour mimiquer le mainnet.
+    // Let's use the 'deploy' function from hre to deploy our FundMe contract
+
+    const fundMe = await deploy("FundMe", {
+        from: deployer,
+        args: [
+            /*
+            list of argumets in the consttructor in the FundMe contract ... priceFeedAddress , priceFeedEuroToUsdAddress
+            */
+        ] , 
+        log: true,  // to avoid doing 'console.log' all the time.
+    })
+
 }
 
 
-// Pour déployer le contract FundMe, que se passera t'il si on change de chaines ?
-// .. Donc il est tjrs recommendé de tester localement(localhost, default hardhat) avant de passer en testnet (Rinkeby, Ropsten...)
-// ... Alors pour déployer sur localhost ou default hardhat en local, on utilisera des 'MOCK' pour mimiquer le mainnet.
 
 

@@ -24,7 +24,7 @@ contract FundMe {
     AggregatorV3Interface public priceFeedEuroToUsd;  
 
     
-    // passer coe argument l'adresse de prix en fucntion de la blockchain sur laquelle on opère Ethereum, BNB, Polygonlgon...Mainnet, rinkeby, Kovan etc...
+    // Lors du deploiement, passer coe argument l'adresse de prix en fucntion de la blockchain sur laquelle on opère Ethereum, BNB, Polygonlgon...Mainnet, rinkeby, Kovan etc...
     constructor(address priceFeedAddress, address priceFeedEuroToUsdAddress) {
         owner = msg.sender;  // the guy who is deploying the contract
         priceFeed = AggregatorV3Interface(priceFeedAddress);  // ETH<=>USD // instead of 'priceFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e)' which is only for Rinkeby;

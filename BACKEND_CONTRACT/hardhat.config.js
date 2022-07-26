@@ -22,7 +22,6 @@ task("accounts", "Prints the list of accounts", async(taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 
- const ROPSTEN_URL = process.env.ROPSTEN_URL 
  const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
  const PRIVATE_KEY = process.env.PRIVATE_KEY
  const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
@@ -32,13 +31,9 @@ module.exports = {
     solidity: "0.8.8",
     defaultNetwork: "hardhat",   // blank blockchain...is detroyed once the script ends. 
     networks: {
-        ropsten: {
-            url: ROPSTEN_URL || "",
-            accounts: []
-        },
         rinkeby: {
             url: RINKEBY_RPC_URL || "",
-            accounts: [PRIVATE_KEY]
+            accounts: PRIVATE_KEY,
         }
     },
     etherscan: {

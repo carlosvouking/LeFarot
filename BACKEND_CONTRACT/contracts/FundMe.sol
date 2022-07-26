@@ -14,7 +14,7 @@ contract FundMe {
 
       // Could we make this constant?  /* hint: no! We should make it immutable! */
     address public /* immutable */ owner;
-    uint256 public constant MINIMUM_USD = 50 * 10 ** 18;
+    uint256 public constant MINIMUM_USD = 50 * 10 ** 18;   // in ETH
     uint256 public constant MINIMUM_EUR = 50 * 10 ** 18;
   
   
@@ -31,13 +31,14 @@ contract FundMe {
         priceFeedEuroToUsd = AggregatorV3Interface(priceFeedEuroToUsdAddress);  // Euro=>USD 
     }
 
-    // get the descripption of the contract
+    // get the description of the contract
     function getDescription() external view returns (string memory) {
         return priceFeed.description();
     }
 
 
     function fund() public payable {
+        //getConversionRate(msg.value, priceFeed)
         require(msg.value.getConversionRate(priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");   // ConversionRate ds 'PriceConverter' aura désormais 2 paramètres: 'msg.value' et 'priceFeed'
         //require(msg.value.getConversionRateInEuro(priceFeedEuroToUsd) >= MINIMUM_EUR, "Not enough Eth to proceed !");
         // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");

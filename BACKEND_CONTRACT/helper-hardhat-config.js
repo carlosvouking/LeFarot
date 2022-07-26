@@ -1,6 +1,7 @@
 // helper file to help define which Network to use in function of the chainId of the blockchain we are on....
 
 const networkConfig = {
+    // Testnets which do have chainId...Easy!?
     4: {
         name: "rinkeby",
         ethUsdPriceFeed: "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e"
@@ -28,6 +29,14 @@ const networkConfig = {
     1666700003: {
         name: "harmony testnet shard 3",
         ethUsdPriceFeed: "0x4f11696cE92D78165E1F8A9a4192444087a45b64"
-    }
+    },
 
+    // local network (default Hardhat or Localhost) which do not have chainId ?? .... Mockup
+    
+
+}
+
+
+module.exports = {
+    networkConfig,
 }

@@ -17,6 +17,9 @@
 
 // 3rd way..............
 // Ces objets de déploiements (getNamedAccounts, deployments) du 'HRE' nous donnent accès à des functions 'deploy', 'log', et 'deployer'
+
+const { networkConfig } = require("../helper-hardhat-config")   // pulling the 'networkConfig' element from the file 'helper-hardhat-config'
+
 module.exports = async({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
@@ -26,7 +29,7 @@ module.exports = async({ getNamedAccounts, deployments }) => {
     //const address = "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e"  
 
     // instead we will derive the actual network through its chainId....reference to: AAVE/aave-v3-core github which also deploys on multiple network addresses.
-
+    const ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]  // read the corresponding network address from networkConfig in helper-hardhat-config'.
 
 
     // Pour déployer le contract FundMe, que se passera t'il si on change de chaines ?

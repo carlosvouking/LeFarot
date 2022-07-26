@@ -31,8 +31,8 @@ const networkConfig = {
         ethUsdPriceFeed: "0x4f11696cE92D78165E1F8A9a4192444087a45b64"
     },
 
-    // local network (default Hardhat or Localhost) which do not have chainId ?? .... Mockup
-    
+    // local network (default Hardhat or Localhost) which do not have PriceFeed address ?? ....On doit créer un 'contrat mock'
+
 
 }
 

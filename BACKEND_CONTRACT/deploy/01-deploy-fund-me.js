@@ -14,12 +14,11 @@
 //     const { getNamedAccounts, deployments } = hre //ie: hre.getNamedAccounts  and hre.deployments
 // }
 
+const { network } = require("hardhat")
+const { networkConfig } = require("../helper-hardhat-config")   // pulling the 'networkConfig' element from the file 'helper-hardhat-config'
 
 // 3rd way..............
 // Ces objets de déploiements (getNamedAccounts, deployments) du 'HRE' nous donnent accès à des functions 'deploy', 'log', et 'deployer'
-
-const { networkConfig } = require("../helper-hardhat-config")   // pulling the 'networkConfig' element from the file 'helper-hardhat-config'
-
 module.exports = async({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
@@ -30,6 +29,14 @@ module.exports = async({ getNamedAccounts, deployments }) => {
 
     // instead we will derive the actual network through its chainId....reference to: AAVE/aave-v3-core github which also deploys on multiple network addresses.
     const ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]  // read the corresponding network address from networkConfig in helper-hardhat-config'.
+
+    /*
+      In case of a local network (default Hardhat or Localhost) which do not have PriceFeed address ?? ....On doit créer un 'contrat mock'. 
+      l'idée des contrts MOCk est teel que si le contrat n existe pas, on déploie une version minimale du contract pour tester en local.
+      Et déployer un contract mock c 'est en fait techniquement un script 'deploy' qu'on va créer.....ici ('00-deploy-mock')
+    */
+
+
 
 
     // Pour déployer le contract FundMe, que se passera t'il si on change de chaines ?

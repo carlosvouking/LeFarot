@@ -14,7 +14,7 @@
 //     const { getNamedAccounts, deployments } = hre //ie: hre.getNamedAccounts  and hre.deployments
 // }
 
-const { network } = require("hardhat")
+const { network } = require("hardhat")  // to help fetch the chainId
 const { networkConfig } = require("../helper-hardhat-config")   // pulling the 'networkConfig' element from the file 'helper-hardhat-config'
 
 // 3rd way..............

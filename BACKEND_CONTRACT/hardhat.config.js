@@ -30,7 +30,7 @@ task("accounts", "Prints the list of accounts", async(taskArgs, hre) => {
 module.exports = {
     //solidity: "0.8.8",
     solidity: {
-        compilers: [{version: "0.8.8"}, {version: "0.6.0"}]
+        compilers: [{version: "0.8.8"}, {version: "0.6.6"}]
     },
     defaultNetwork: "hardhat",   // blank blockchain...is destroyed once the script ends. 
     networks: {
